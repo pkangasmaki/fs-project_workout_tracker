@@ -1,0 +1,8 @@
+div {
+  margin: 2px
+}
+
+table.nav-table {
+  table-layout: auto;
+  width: 90px;  
+}
