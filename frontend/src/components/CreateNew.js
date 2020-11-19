@@ -9,16 +9,26 @@ const CreateNew = ( {newRoutine, setNewRoutine}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    alert(e.target.value)
+    if(newRoutine) {
+      console.log('You created new routine:', newRoutine)
+    } else {
+      console.log('Error: name must contain at least 1 letter')
+    }
+  }
+
+  const clearField = () => {
+    setNewRoutine('')
   }
 
   return (
     <div>
       <p>Create a new routine </p>
       <form onSubmit={handleSubmit}>
-        <div> Routine name: <input type='text' value='asd' /></div>
+        <div> 
+        Routine name: 
+        <input type='text' value={newRoutine || ''} onChange={event => setNewRoutine(event.target.value)} /></div>
         <Button type='submit' variant="primary" style={margin}>Create </Button>
-        <Button variant="outline-danger" style={margin}>Clear </Button>
+        <Button onClick={clearField} variant="outline-danger" style={margin}>Clear </Button>
       </form>
     </div>
   )
