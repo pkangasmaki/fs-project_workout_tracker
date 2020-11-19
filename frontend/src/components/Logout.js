@@ -5,6 +5,7 @@ const Logout = ( {user, setUser} ) => {
 
   const handleLogout = () => {
     setUser('')
+    console.log('logged out')
   }
 
   return(

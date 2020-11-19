@@ -18,6 +18,7 @@ const CreateNew = ( {newRoutine, setNewRoutine}) => {
 
   const clearField = () => {
     setNewRoutine('')
+    console.log('Cleared routine name')
   }
 
   return (

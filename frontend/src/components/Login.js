@@ -8,7 +8,7 @@ const Login = ( {setUser} ) => {
 
   const handleLogin = (e) => {
     e.preventDefault()
-    console.log('Loggin in: ', username, password)
+    console.log('Loggin in => Username:', username, ', Password:', password)
     setUser(username)
   }
 

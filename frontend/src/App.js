@@ -22,6 +22,7 @@ const App = () => {
   //Set drop-down value to routine-state
   const handleSelection = (e) => {
     setRoutine(e.target.value)
+    console.log('Selected routine:', e.target.value)
   }
 
   return (
