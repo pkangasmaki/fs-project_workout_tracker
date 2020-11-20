@@ -19,18 +19,18 @@ const Login = ( {setUser} ) => {
   const handleLogin = (e) => {
     e.preventDefault()
     console.log('Loggin in => Username:', username, ', Password:', password)
-    setUser(username)
+    setUser('Joonatan')
   }
 
   return (
     <div>
-      <div class="split-left left" 
+      <div className="split-left left" 
         style = {{ backgroundImage: `url(${logo})`,
         backgroundSize: 'cover', 
         backgroundPosition: 'center center',
         backgroundRepeat: 'no-repeat',
       }}>
-        <div class="centered title">
+        <div className="centered title">
           <h2>Workout tracker</h2>
           <p>welcome!</p>
         </div>
@@ -40,8 +40,8 @@ const Login = ( {setUser} ) => {
           <Signup/>
         </Route>
         <Route path="/">
-          <div class="split-right right">
-            <div class="centered">
+          <div className="split-right right">
+            <div className="centered">
               <div style={{padding: 10}}>
                 <h1 style={{padding: 5}}>Login</h1>
                   <Form onSubmit={handleLogin}>
@@ -70,28 +70,3 @@ const Login = ( {setUser} ) => {
 }
 
 export default Login
-
-/*
-
-  return (
-    <div style={{padding: 10}}>
-      <h1>Login</h1>
-      <Form onSubmit={handleLogin}>
-        <Form.Group>
-          <Form.Label>Username</Form.Label>
-          <Form.Control placeholder="Enter username" onChange={(e) => setUsername(e.target.value)} />
-          <Form.Text className="text-muted">
-          We'll never share your information with anyone else.
-          </Form.Text>
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Password</Form.Label>
-          <Form.Control placeholder="Enter password" onChange={(e) => setPassword(e.target.value)} />
-        </Form.Group>
-        <Form.Check type="checkbox" id="remember" label="Remember me" />
-        <Button type='submit'> Login </Button>
-      </Form>
-    </div>
-  )
-
-*/

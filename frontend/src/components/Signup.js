@@ -9,8 +9,8 @@ import {
 
 const Signup = () => {
   return (
-    <div class="split-right right">
-            <div class="centered">
+    <div className="split-right right">
+            <div className="centered">
               <div style={{padding: 10}}>
                 <h1 style={{padding: 7}}>Sign up</h1>
                   <Form>

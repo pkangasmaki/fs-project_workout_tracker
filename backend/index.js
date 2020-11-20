@@ -1,6 +1,10 @@
 const express = require('express')
+const cors = require('cors')
 
 const app = express()
+
+app.use(cors())
+
 const port = 3001
 
 /*
@@ -67,7 +71,7 @@ const users = [
 
 app.use(express.json())
 
-app.get('/', (req, res) => {
+app.get('/api/users', (req, res) => {
   res.json(users)
 })
 

@@ -13,11 +13,21 @@ import Suggestions from './components/Suggestions'
 import Login from './components/Login'
 import Logout from './components/Logout'
 
+import userService from './services/user'
+
 const App = () => {
 
   const [routine, setRoutine] = useState('')
   const [newRoutine, setNewRoutine] = useState('')
-  const [user, setUser] = useState('')
+  const [user, setUser] = useState('Joonatan')
+  
+  //Test backend
+  const kayttajat = async () => {
+    const allUsers = await userService.userList()
+    console.log(allUsers)
+  }
+
+  kayttajat()
 
   //Set drop-down value to routine-state
   const handleSelection = (e) => {
