@@ -17,7 +17,7 @@ const App = () => {
 
   const [routine, setRoutine] = useState('')
   const [newRoutine, setNewRoutine] = useState('')
-  const [user, setUser] = useState('Placeholder')
+  const [user, setUser] = useState('')
 
   //Set drop-down value to routine-state
   const handleSelection = (e) => {
