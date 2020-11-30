@@ -2,9 +2,7 @@
 
 Heroku: 
 
-Suunnitelmat: 
-
-Työaikakirjantpito: 
+Työaikakirjanpito: 
 
 
 ### Sovelluksen käyttöohjeet:
