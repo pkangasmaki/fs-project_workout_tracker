@@ -8,13 +8,13 @@ const User = require('../models/User')
 
 //Homepage route
 router.get('/', async (req, res) => {
-  const allUsers = await User.find({})
+  const allUsers = await User.find({}).populate('routines', { workouts: 1, name: 1 })
   res.json(allUsers)
 })
 
 //Post to homepage
 router.post('/', async (req, res) => {
-  //To do: Varmista että on annettu Käyttäjänimi, nimi ja salasana
+  //TO DO: Varmista että on annettu Käyttäjänimi, nimi ja salasana
   const saltRounds = 10
   const passwordHash = await bcrypt.hash(req.body.password, saltRounds)
   const newUser = new User({
@@ -26,5 +26,22 @@ router.post('/', async (req, res) => {
   const savedUser = await newUser.save()
   res.json(savedUser)
 })
+
+/* TO DO:
+//Change existing password
+router.put('/:id', (req, res) => {
+  const currentUser = {
+    place: 'holder'
+  }
+
+  const newPassword = req.body.newPassword
+
+  const updatedUser = {
+    ...currentUser,
+    password: newPassword
+  }
+  res.json(updatedUser)
+})
+*/
 
 module.exports = router

@@ -7,6 +7,8 @@ const mongoose = require('mongoose')
 
 //Controllers
 const usersRouter = require('./controllers/users')
+const routinesRouter = require('./controllers/routines')
+const workoutRouter = require('./controllers/workout')
 
 const app = express()
 
@@ -25,5 +27,7 @@ app.use(express.json())
 
 //Routes
 app.use('/api/users', usersRouter)
+app.use('/api/routines', routinesRouter)
+app.use('/api/workout', workoutRouter)
 
 module.exports = app

@@ -1,10 +1,20 @@
 const mongoose = require('mongoose')
+const uniqueValidator = require('mongoose-unique-validator')
 
+//Tarvitsee refenressin routinelistaansa
 const userSchema = new mongoose.Schema({
-  username: String,
-  name: String,
-  password: String
+  username: { type: String, required: true, unique: true },
+  name: { type: String, required: true },
+  password: { type: String, required: true },
+  routines: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Routine'
+    }
+  ]
 })
+
+userSchema.plugin(uniqueValidator)
 
 userSchema.set('toJSON', {
   transform: function (doc, ret) {
