@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button'
 import './Login.css'
 import logo from '../taustakuva2.png';
 import Signup from './Signup'
+import loginService from '../services/login'
 
 import {
   Switch,
@@ -16,10 +17,19 @@ const Login = ( {setUser} ) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault()
-    console.log('Loggin in => Username:', username, ', Password:', password)
-    setUser('Kayttaja')
+    const credentials = {
+      username,
+      password
+    }
+    try {
+      const loggedInUser = await loginService.login(credentials)
+      setUser(loggedInUser)
+      localStorage.setItem('loggedUser', JSON.stringify(loggedInUser));
+    } catch (e) {
+      console.log('Incorrect credentials')
+    }
   }
 
   return (
@@ -52,7 +62,7 @@ const Login = ( {setUser} ) => {
                       </Form.Text>
                     </Form.Group>
                     <Form.Group>
-                      <Form.Control placeholder="Enter password" onChange={(e) => setPassword(e.target.value)} />
+                      <Form.Control type="password" placeholder="Enter password" onChange={(e) => setPassword(e.target.value)} />
                     </Form.Group>
                     <Form.Check type="checkbox" id="remember" label="Remember me" />
                     <Form.Text className="text-muted">

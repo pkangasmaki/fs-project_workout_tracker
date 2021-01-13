@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -13,21 +13,19 @@ import Suggestions from './components/Suggestions'
 import Login from './components/Login'
 import Logout from './components/Logout'
 
-import userService from './services/user'
-
 const App = () => {
 
   const [routine, setRoutine] = useState('')
   const [newRoutine, setNewRoutine] = useState('')
-  const [user, setUser] = useState('')
-  
-  //Test backend
-  const kayttajat = async () => {
-    const allUsers = await userService.userList()
-    console.log(allUsers)
-  }
+  const [user, setUser] = useState(null)
 
-  kayttajat()
+  const hook = () => {
+    const user = localStorage.getItem('loggedUser')
+    if (user) {
+      setUser(JSON.parse(user))
+    }
+  }
+  useEffect(hook, [])
 
   //Set drop-down value to routine-state
   const handleSelection = (e) => {

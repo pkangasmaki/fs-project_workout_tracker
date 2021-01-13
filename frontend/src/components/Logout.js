@@ -5,12 +5,13 @@ const Logout = ( {user, setUser} ) => {
 
   const handleLogout = () => {
     setUser('')
+    localStorage.clear();
     console.log('logged out')
   }
 
   return(
     <div>
-      {user} logged in
+      {user.name} logged in
       <Button onClick={handleLogout}>Logout</Button>
     </div>
   )
