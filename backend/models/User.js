@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 const uniqueValidator = require('mongoose-unique-validator')
 
+mongoose.set('useCreateIndex', true)
+
 //Tarvitsee refenressin routinelistaansa
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },

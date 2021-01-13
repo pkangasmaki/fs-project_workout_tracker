@@ -19,7 +19,7 @@ const App = () => {
 
   const [routine, setRoutine] = useState('')
   const [newRoutine, setNewRoutine] = useState('')
-  const [user, setUser] = useState('Joonatan')
+  const [user, setUser] = useState('')
   
   //Test backend
   const kayttajat = async () => {

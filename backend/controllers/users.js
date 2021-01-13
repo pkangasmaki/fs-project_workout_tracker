@@ -15,16 +15,32 @@ router.get('/', async (req, res) => {
 //Post to homepage
 router.post('/', async (req, res) => {
   //TO DO: Varmista että on annettu Käyttäjänimi, nimi ja salasana
-  const saltRounds = 10
-  const passwordHash = await bcrypt.hash(req.body.password, saltRounds)
-  const newUser = new User({
-    username: req.body.username,
-    name: req.body.name,
-    password: passwordHash
-  })
+  try {
+    const allUsers = await User.find({})
 
-  const savedUser = await newUser.save()
-  res.json(savedUser)
+    let taken = false
+    Object.keys(allUsers).forEach( (key) => {
+      if (allUsers[key].username === req.body.username) {
+        taken = true
+      }
+    })
+
+    if(!taken) {
+      const saltRounds = 10
+      const passwordHash = await bcrypt.hash(req.body.password, saltRounds)
+      const newUser = new User({
+        username: req.body.username,
+        name: req.body.name,
+        password: passwordHash
+      })
+
+      const savedUser = await newUser.save()
+      res.json(savedUser)
+    } else res.status(400).end('Username taken.')
+
+  } catch (e) {
+    res.status(400).end('Sign-up error, try again later.')
+  }
 })
 
 /* TO DO:
