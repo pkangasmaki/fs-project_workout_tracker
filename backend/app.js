@@ -9,6 +9,7 @@ const mongoose = require('mongoose')
 const usersRouter = require('./controllers/users')
 const routinesRouter = require('./controllers/routines')
 const workoutRouter = require('./controllers/workout')
+const loginRouter = require('./controllers/login')
 
 const app = express()
 
@@ -29,5 +30,6 @@ app.use(express.json())
 app.use('/api/users', usersRouter)
 app.use('/api/routines', routinesRouter)
 app.use('/api/workout', workoutRouter)
+app.use('/api/login', loginRouter)
 
 module.exports = app
