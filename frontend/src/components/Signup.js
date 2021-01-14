@@ -33,8 +33,6 @@ const Signup = () => {
       await userService.signUp(newUser)
       history.push('/')
       console.log('new user added')
-      //Redirect -> login
-      //Ilmotus uudesta käyttäjästä
     } catch (e) {
       console.log('error')
     }
