@@ -10,7 +10,7 @@ router.get('/', async (req,res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    const routine = await Routine.findById(req.params.id).populate('workouts')
+    const routine = await Routine.findById(req.params.id).populate('workouts').populate('user', { name: 1 })
     if(!routine) return res.status(404).send('routine not found')
     res.send(routine)
   } catch (e) {
