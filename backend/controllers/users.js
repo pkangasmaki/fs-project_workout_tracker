@@ -12,6 +12,16 @@ router.get('/', async (req, res) => {
   res.json(allUsers)
 })
 
+router.get('/:id', async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id).populate('routines', { name: 1 })
+    if(!user) return res.status(404).send('user not found')
+    res.send(user)
+  } catch (e) {
+    return res.status(404).send('user not found')
+  }
+})
+
 //Post to homepage
 router.post('/', async (req, res) => {
   if (!req.body.username) res.status(400).end('Username is required.')

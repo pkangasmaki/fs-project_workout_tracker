@@ -8,6 +8,16 @@ router.get('/', async (req,res) => {
   res.json(allRoutines)
 })
 
+router.get('/:id', async (req, res) => {
+  try {
+    const routine = await Routine.findById(req.params.id).populate('workouts')
+    if(!routine) return res.status(404).send('routine not found')
+    res.send(routine)
+  } catch (e) {
+    return res.status(404).send('routine not found')
+  }
+})
+
 router.post('/', async (req,res) => {
 
   //Find the correct user to add him as an owner to the routine
