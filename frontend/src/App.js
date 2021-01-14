@@ -12,6 +12,7 @@ import CreateNew from './components/CreateNew'
 import Suggestions from './components/Suggestions'
 import Login from './components/Login'
 import Logout from './components/Logout'
+import EditRoutine from './components/EditRoutine'
 
 const App = () => {
 
@@ -51,6 +52,9 @@ const App = () => {
                     <Link to="/createnew">Create new</Link>
                   </td>
                   <td>
+                    <Link to="/edit">Edit</Link>
+                  </td>
+                  <td>
                     <Link to="/suggestions">Suggestions</Link>
                   </td>
                 </tr>
@@ -66,6 +70,9 @@ const App = () => {
             </Route>
             <Route path="/createnew">
               <CreateNew newRoutine={newRoutine} setNewRoutine={setNewRoutine} />
+            </Route>
+            <Route path="/edit">
+              <EditRoutine />
             </Route>
             <Route path="/">
               <Routines handleSelection={handleSelection} routine={routine} />
