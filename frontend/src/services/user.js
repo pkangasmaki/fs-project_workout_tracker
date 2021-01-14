@@ -7,4 +7,8 @@ const userList = async () => {
   return users.data
 }
 
-export default { userList }
+const signUp = async (userData) => {
+  await axios.post(baseUrl, userData)
+}
+
+export default { userList, signUp }

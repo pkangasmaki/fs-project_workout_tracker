@@ -16,6 +16,7 @@ const Login = ( {setUser} ) => {
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [stayLoggedIn, setStayLoggedIn] = useState(false)
 
   const handleLogin = async (e) => {
     e.preventDefault()
@@ -26,10 +27,16 @@ const Login = ( {setUser} ) => {
     try {
       const loggedInUser = await loginService.login(credentials)
       setUser(loggedInUser)
-      localStorage.setItem('loggedUser', JSON.stringify(loggedInUser));
+      if(stayLoggedIn) {
+        localStorage.setItem('loggedUser', JSON.stringify(loggedInUser));
+      }
     } catch (e) {
       console.log('Incorrect credentials')
     }
+  }
+
+  const handleCheckbox = () => {
+    setStayLoggedIn(!stayLoggedIn)
   }
 
   return (
@@ -64,7 +71,7 @@ const Login = ( {setUser} ) => {
                     <Form.Group>
                       <Form.Control type="password" placeholder="Enter password" onChange={(e) => setPassword(e.target.value)} />
                     </Form.Group>
-                    <Form.Check type="checkbox" id="remember" label="Remember me" />
+                    <Form.Check type="checkbox" id="stay" label="Stay signed in" onChange={handleCheckbox}/>
                     <Form.Text className="text-muted">
                     Don't have an account? Click here to <Link to="/signup">Sign up</Link>
                   </Form.Text>
