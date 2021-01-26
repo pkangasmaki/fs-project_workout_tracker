@@ -24,16 +24,27 @@ router.post('/', async (req, res) => {
   const routine = await Routine.findById(req.body.routine)
 
   if(!routine) {
-    res.send('Needs routine!')
+    res.send('Error identifying routine: incorrect id.')
   }
 
+  /*
   const newWorkout = new Workout({
     exercise: req.body.exercise,
     sets: req.body.sets,
-    reps: req.body.reps,
+    repetitions: req.body.repetitions,
     weight: req.body.weight,
     routine: routine.id
   })
+  */
+
+  const newWorkout = new Workout({
+    exercise: req.body.exercise,
+    sets: 0,
+    repetitions: 0,
+    weight: 0,
+    routine: routine.id
+  })
+
   await newWorkout.save()
 
   routine.workouts = routine.workouts.concat(newWorkout.id)

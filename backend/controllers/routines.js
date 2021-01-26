@@ -1,5 +1,6 @@
 const express = require('express')
 const Routine = require('../models/Routine')
+const Workout = require('../models/Workout')
 const User = require('../models/User')
 const router = express.Router()
 
@@ -13,6 +14,32 @@ router.get('/:id', async (req, res) => {
     const routine = await Routine.findById(req.params.id).populate('workouts').populate('user', { name: 1 })
     if(!routine) return res.status(404).send('routine not found')
     res.send(routine)
+  } catch (e) {
+    return res.status(404).send('routine not found')
+  }
+})
+
+router.get('/:id/workouts/:workout_id', async (req, res) => {
+  try {
+    const routine = await Routine.findById(req.params.id)
+    if(!routine) return res.status(404).send('routine not found')
+
+    const workout = await Workout.findById(req.params.workout_id)
+    res.json(workout)
+
+  } catch (e) {
+    return res.status(404).send('routine not found')
+  }
+})
+
+router.get('/:id/workouts', async (req, res) => {
+  try {
+    const routine = await Routine.findById(req.params.id)
+    if(!routine) return res.status(404).send('routine not found')
+
+    const allWorkouts = await Workout.find({ routine: req.params.id })
+    res.json(allWorkouts)
+
   } catch (e) {
     return res.status(404).send('routine not found')
   }

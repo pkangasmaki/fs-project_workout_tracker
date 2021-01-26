@@ -25,6 +25,7 @@ router.post('/', async (req, res) => {
   const signedUser = {
     username: user.username,
     name: user.name,
+    id: user._id,
     token
   }
 

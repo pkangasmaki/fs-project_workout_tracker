@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const workoutSchema = new mongoose.Schema({
   exercise: String,
   sets: Number,
-  reps: Number,
+  repetitions: Number,
   weight: Number,
   routine: {
     type: mongoose.Schema.Types.ObjectId,

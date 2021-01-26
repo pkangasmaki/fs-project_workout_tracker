@@ -10,6 +10,7 @@ const usersRouter = require('./controllers/users')
 const routinesRouter = require('./controllers/routines')
 const workoutRouter = require('./controllers/workout')
 const loginRouter = require('./controllers/login')
+const helpRouter = require('./controllers/help')
 
 const app = express()
 
@@ -31,5 +32,6 @@ app.use('/api/users', usersRouter)
 app.use('/api/routines', routinesRouter)
 app.use('/api/workout', workoutRouter)
 app.use('/api/login', loginRouter)
+app.use('/api/help', helpRouter)
 
 module.exports = app
