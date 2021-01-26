@@ -1,14 +1,31 @@
 import React from 'react'
 
 const Suggestions = () => {
-
-  const margin = {
-    margin: 20
-  }
-
   return (
     <div>
-      <p style={margin}>If you want the most gains, you should train each muscle group twice a week, according to a new review in the journal Sports Medicine. Scientists analyzed 10 prior studies that compared muscle growth in people who trained each muscle group once, twice, or three times per week over a couple months</p>
+      <p>Push pull legs: 
+        <i>
+          <a href="https://medium.com/@BradNewtonTV/the-ultimate-beginner-guide-push-pull-legs-5d576162868f"> https://medium.com/@BradNewtonTV/the-ultimate-beginner-guide-push-pull-legs-5d576162868f</a>
+        </i>
+      </p>
+
+      <p>full body: 
+        <i>
+          <a href="https://builtwithscience.com/best-full-body-workout/"> https://builtwithscience.com/best-full-body-workout/</a>
+        </i>
+      </p>
+
+      <p>upper/lower body: 
+        <i>
+          <a href="https://www.muscleandstrength.com/workouts/upper-lower-4-day-gym-bodybuilding-workout"> https://https://www.muscleandstrength.com/workouts/upper-lower-4-day-gym-bodybuilding-workout</a>
+        </i>
+      </p>
+
+      <p>bro split: 
+        <i>
+          <a href="https://victoremgear.com/blogs/resistance-training/5-day-workout-split"> https://victoremgear.com/blogs/resistance-training/5-day-workout-split</a>
+        </i>
+      </p>
     </div>
   )
 }

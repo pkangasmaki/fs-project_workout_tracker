@@ -14,25 +14,31 @@ import Login from './components/Login'
 import Logout from './components/Logout'
 import EditRoutine from './components/EditRoutine'
 
+import userService from './services/user'
+
 const App = () => {
 
   const [routine, setRoutine] = useState('')
-  const [newRoutine, setNewRoutine] = useState('')
   const [user, setUser] = useState(null)
+  const [userRoutines, setUserRoutines] = useState([])
 
-  const hook = () => {
-    const user = localStorage.getItem('loggedUser')
-    if (user) {
-      setUser(JSON.parse(user))
+  const routineHook = () => {
+    const getRoutine = async (user) => {
+      const found = await userService.getUser(user)
+      setUserRoutines(found.routines)
+    }
+    if(user) getRoutine(user.id)
+  }
+
+  const storageHook = () => {
+    const storageUser = localStorage.getItem('loggedUser')
+    if (storageUser) {
+      setUser(JSON.parse(storageUser))
     }
   }
-  useEffect(hook, [])
 
-  //Set drop-down value to routine-state
-  const handleSelection = (e) => {
-    setRoutine(e.target.value)
-    console.log('Selected routine:', e.target.value)
-  }
+  useEffect(routineHook, [user])
+  useEffect(storageHook, [])
 
   return (
     <Router>
@@ -40,42 +46,39 @@ const App = () => {
 
       {user &&
         <div>
-          <Logout user={user} setUser={setUser} />
+          <Logout user={user} setUser={setUser} setRoutine={setRoutine} setUserRoutines={setUserRoutines} />
           <nav>
             <table className='nav-table'>
               <tbody>
                 <tr>
                   <td >
-                    <Link to="/">Home</Link>
+                    <Link to="/"> Home</Link>
                   </td>
                   <td>
-                    <Link to="/createnew">Create new</Link>
+                    <Link to="/createnew"> Add routine </Link>
                   </td>
                   <td>
-                    <Link to="/edit">Edit</Link>
-                  </td>
-                  <td>
-                    <Link to="/suggestions">Suggestions</Link>
+                    <Link to="/suggestions"> Suggestions</Link>
                   </td>
                 </tr>
               </tbody>
             </table>
           </nav>
 
-          <h1>Workout tracker</h1>
+          <h3>Workout tracker</h3>
           
           <Switch>
             <Route path="/suggestions">
               <Suggestions />
             </Route>
             <Route path="/createnew">
-              <CreateNew newRoutine={newRoutine} setNewRoutine={setNewRoutine} />
+              <CreateNew user={user} />
             </Route>
             <Route path="/edit">
               <EditRoutine />
             </Route>
             <Route path="/">
-              <Routines handleSelection={handleSelection} routine={routine} />
+              <Routines setRoutine={setRoutine} routine={routine} routines={userRoutines} />
             </Route>
           </Switch>
         </div>
