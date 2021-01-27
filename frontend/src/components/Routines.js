@@ -15,17 +15,31 @@ const Routines = ({setRoutine, routine, routines}) => {
     if(routine) getRoutine()
   }
 
-  useEffect(hook, [routine])
+  const storageHook = () => {
+
+    const getRoutine = async (storageRoutine) => {
+      const foundRoutine = await routineService.getRoutine(storageRoutine)
+      setRoutine(storageRoutine)
+      setWorkoutList(foundRoutine.workouts)
+    }
+
+    const storageRoutine = localStorage.getItem('selectedRoutine')
+    if (storageRoutine) {
+      getRoutine(storageRoutine)
+    }
+  }
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(storageHook, [])
+  useEffect(hook, [routine, workoutList]) //BUG: workoutlist aiheuttaa värinän
 
   //Set drop-down value to routine-state
   const handleSelection = async (e) => {
     setWorkoutList([])
     setRoutine(e.target.value)
+    localStorage.removeItem('selectedRoutine');
+    localStorage.setItem('selectedRoutine', e.target.value);
   }
-
-  const tableStyle = {
-    "border": "1px solid black"
- };
 
   return (
     <div>
@@ -38,12 +52,12 @@ const Routines = ({setRoutine, routine, routines}) => {
       </select>
       </div>
     <div>
-      {routine && `Chosen routine: ${routines.find(e => e.id === routine).name}`}
+      {routine && routines.length !== 0 && `Chosen routine: ${routines.find(e => e.id === routine).name}`}
     </div>
-    <table style={tableStyle}>
+    <table>
     {workoutList.map(workout =>
-        <tbody style={tableStyle} key={workout.id} >
-          <Workout workout={workout} />
+        <tbody key={workout.id} >
+          <Workout workout={workout} id={workout.id} />
         </tbody>
     )}
     </table>

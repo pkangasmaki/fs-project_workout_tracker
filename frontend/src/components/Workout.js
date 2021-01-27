@@ -1,18 +1,17 @@
 import React from 'react'
+import './Workout.css'
+import Edit from './Edit'
 
-const Workout = ({ workout }) => {
+const Workout = ({ workout, id }) => {
+
   if(!workout) return null
 
-  const tableStyle = {
-    "border": "1px solid black",
-    "padding": 4
- };
-
   return (
-    <tr style={tableStyle}>
-      <td style={tableStyle}>{workout.exercise}</td>
-      <td style={tableStyle}>{workout.sets}x{workout.repetitions}</td>
-      <td style={tableStyle}>{workout.weight}kg</td>
+    <tr>
+      <td className="workout">{workout.exercise}</td>
+      <td className="workout">{workout.sets}x{workout.repetitions}</td>
+      <td className="workout">{workout.weight}kg</td>
+      <td><Edit exercise={workout.exercise} sets={workout.sets} repetitions={workout.repetitions} weight={workout.weight} id={id} /></td>
     </tr>
   )
 }
