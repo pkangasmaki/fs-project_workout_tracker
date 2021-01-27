@@ -18,6 +18,7 @@ const app = express()
 mongoose.connect(process.env.MONGODB_URI, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
+  useFindAndModify: false
 }).then(() => {
   console.log(`Connected to ${process.env.MONGODB_URI}`)
 }).catch(err => {

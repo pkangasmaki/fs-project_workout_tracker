@@ -19,6 +19,20 @@ router.get('/:id', async (req, res) => {
   }
 })
 
+router.put('/:id', async (req, res) => {
+  if (!req.body.sets || !req.body.repetitions || !req.body.weight) return res.status(400).send('values missing')
+
+  if (typeof req.body.sets !== 'number' || typeof req.body.repetitions !== 'number' || typeof req.body.weight !== 'number') return res.status(400).send('invalid values')
+
+  const newData = {
+    sets: req.body.sets,
+    repetitions: req.body.repetitions,
+    weight: req.body.weight
+  }
+  const workout = await Workout.findByIdAndUpdate(req.params.id, newData)
+  res.send(workout)
+})
+
 router.post('/', async (req, res) => {
 
   const routine = await Routine.findById(req.body.routine)
