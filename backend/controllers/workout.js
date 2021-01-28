@@ -33,6 +33,14 @@ router.put('/:id', async (req, res) => {
   res.send(workout)
 })
 
+//TO DO: authentication
+router.delete('/:id', async (req, res) => {
+  const workout = await Workout.findById(req.params.id)
+  await Workout.deleteOne(workout)
+  res.send(workout)
+})
+
+//TO DO:
 router.post('/', async (req, res) => {
 
   const routine = await Routine.findById(req.body.routine)
