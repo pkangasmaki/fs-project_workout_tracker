@@ -10,4 +10,8 @@ const addWorkout = async (workout, routine) => {
   await axios.post(baseUrl, workoutObj)
 }
 
-export default { addWorkout }
+const deleteWorkout = async (id) => {
+  await axios.delete(`${baseUrl}/${id}`)
+}
+
+export default { addWorkout, deleteWorkout }

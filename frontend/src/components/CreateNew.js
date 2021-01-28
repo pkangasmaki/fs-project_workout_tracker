@@ -64,7 +64,7 @@ const CreateNew = ( { user }) => {
             value={workout}
             onChange={({ target }) => setWorkout(target.value)}
           />
-          <Button onClick={addWorkout} type="button" variant="light" size="sm">add workout*</Button>
+          <Button onClick={addWorkout} type="button" variant="light" size="sm">add exercise*</Button>
         </div>
         <div>
           <i>{workouts.join(', ')}</i>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Workout from '../components/Workout'
+import Add from './Add'
 
 import routineService from '../services/routine'
 
@@ -61,6 +62,7 @@ const Routines = ({setRoutine, routine, routines}) => {
         </tbody>
     )}
     </table>
+    {routine && <Add routine={routine}/>}
   </div>
   )
 }
