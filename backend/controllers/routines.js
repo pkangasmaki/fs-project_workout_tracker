@@ -67,4 +67,26 @@ router.post('/', async (req,res) => {
   res.json(newRoutine)
 })
 
+//To do: authentication
+router.delete('/:id', async (req, res) => {
+  try {
+    //Find routine and the user of the routine
+    const routine = await Routine.findById(req.params.id)
+    const user = await User.findById(routine.user)
+    console.log('bfore', user)
+    if(!routine) return res.status(404).send('routine not found')
+    if(!user) return res.status(404).send('error with user')
+
+    //Delete routine from users list
+    // eslint-disable-next-line eqeqeq
+    user.routines = user.routines.filter(e => e != routine.id)
+    await Routine.deleteOne(routine)
+    await user.save()
+    console.log('after', user)
+    res.send(routine)
+  } catch (e) {
+    return res.status(404).send('routine not found')
+  }
+})
+
 module.exports = router
