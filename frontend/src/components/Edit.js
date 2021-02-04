@@ -7,7 +7,6 @@ import workoutService from '../services/workout'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Form from 'react-bootstrap/Form'
 
 const Edit = ({ exercise, sets, repetitions, weight, id, setUpdated, updated }) => {
   const [show, setShow] = useState(false);
