@@ -14,4 +14,12 @@ const deleteWorkout = async (id) => {
   await axios.delete(`${baseUrl}/${id}`)
 }
 
-export default { addWorkout, deleteWorkout }
+const moveUp = async (id) => {
+  await axios.post(`${baseUrl}/${id}/moveup`)
+}
+
+const moveDown = async (id) => {
+  await axios.post(`${baseUrl}/${id}/movedown`)
+}
+
+export default { addWorkout, deleteWorkout, moveUp, moveDown }
