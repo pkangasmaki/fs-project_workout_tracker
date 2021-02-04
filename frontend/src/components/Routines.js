@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Workout from '../components/Workout'
 import Add from './Add'
 import Table from 'react-bootstrap/Table'
-
+import Button from 'react-bootstrap/Button'
 import routineService from '../services/routine'
 
 const Routines = ({setRoutine, routine, routines}) => {
@@ -43,6 +43,14 @@ const Routines = ({setRoutine, routine, routines}) => {
     localStorage.setItem('selectedRoutine', e.target.value);
   }
 
+  const handleDelete = () => {
+    if (window.confirm(`Are you sure you want to delete routine "${routines.find(e => e.id === routine).name}"?`)) {
+      routineService.deleteRoutine(routine)
+      setRoutine('')
+      window.location.reload();
+    }
+  }
+
   return (
     <div>
       <div>
@@ -64,7 +72,11 @@ const Routines = ({setRoutine, routine, routines}) => {
       </tbody>
     </Table>
     {routine && 
+      <>
       <Add routine={routine} setUpdated={setUpdated} updated={updated}/>
+      <br/>
+      <Button style={{color:"red"}} variant="link btn-sm" onClick={handleDelete}>-Delete routine</Button>
+      </>
     }
   </div>
   )

@@ -7,9 +7,13 @@ const getRoutine = async (id) => {
   return foundRoutine.data
 }
 
+const deleteRoutine = async (id) => {
+  await axios.delete(`${baseUrl}/${id}`)
+}
+
 const createRoutine = async (routine) => {
   const addedRoutine = await axios.post(baseUrl, routine)
   return addedRoutine.data
 }
 
-export default { createRoutine, getRoutine }
+export default { createRoutine, getRoutine, deleteRoutine }
