@@ -13,6 +13,7 @@ import Suggestions from './components/Suggestions'
 import Login from './components/Login'
 import Logout from './components/Logout'
 import EditRoutine from './components/EditRoutine'
+import Footer from './components/Footer'
 
 import userService from './services/user'
 
@@ -37,15 +38,16 @@ const App = () => {
     }
   }
 
-  useEffect(routineHook, [user])
+  useEffect(routineHook, [user, userRoutines])
   useEffect(storageHook, [])
 
   return (
+    <div>
     <Router>
       {!user && <Login setUser={setUser} />}
 
       {user &&
-        <div>
+        <div style={{"marginLeft":"10px"}}>
           <Logout user={user} setUser={setUser} setRoutine={setRoutine} setUserRoutines={setUserRoutines} />
           <nav>
             <table className='nav-table'>
@@ -84,6 +86,8 @@ const App = () => {
         </div>
       }
     </Router>
+    <Footer />
+    </div>
   )
 }
 

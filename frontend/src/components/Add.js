@@ -7,7 +7,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import workoutService from '../services/workout'
 
-const Add = ({ routine }) => {
+const Add = ({ routine, setUpdated, updated }) => {
   const [show, setShow] = useState(false)
   const [name, setName] = useState('')
   const [sets, setSets] = useState(0)
@@ -36,6 +36,7 @@ const Add = ({ routine }) => {
     setRepetitions(0)
     setWeight(0)
     setShow(false)
+    setUpdated(!updated)
   }
 
   return (

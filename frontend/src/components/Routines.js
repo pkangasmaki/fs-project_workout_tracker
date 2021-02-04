@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Workout from '../components/Workout'
 import Add from './Add'
+import Table from 'react-bootstrap/Table'
 
 import routineService from '../services/routine'
 
 const Routines = ({setRoutine, routine, routines}) => {
 
   const [workoutList, setWorkoutList] = useState([])
+  const [updated, setUpdated] = useState(false)
 
   const hook = () => {
     const getRoutine = async () => {
@@ -32,11 +34,10 @@ const Routines = ({setRoutine, routine, routines}) => {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(storageHook, [])
-  useEffect(hook, [routine, workoutList]) //BUG: workoutlist aiheuttaa värinän
+  useEffect(hook, [routine, updated])
 
   //Set drop-down value to routine-state
   const handleSelection = async (e) => {
-    setWorkoutList([])
     setRoutine(e.target.value)
     localStorage.removeItem('selectedRoutine');
     localStorage.setItem('selectedRoutine', e.target.value);
@@ -55,14 +56,16 @@ const Routines = ({setRoutine, routine, routines}) => {
     <div>
       {routine && routines.length !== 0 && `Chosen routine: ${routines.find(e => e.id === routine).name}`}
     </div>
-    <table>
-    {workoutList.map(workout =>
-        <tbody key={workout.id} >
-          <Workout workout={workout} id={workout.id} />
-        </tbody>
-    )}
-    </table>
-    {routine && <Add routine={routine}/>}
+    <Table style={{"width":"75%", "border":"none"}} striped hover variant="dark">
+      <tbody>
+        {workoutList.map((workout, index) =>
+          <Workout key={workout.id} workout={workout} setUpdated={setUpdated} updated={updated} index={index} length={workoutList.length} />
+        )}
+      </tbody>
+    </Table>
+    {routine && 
+      <Add routine={routine} setUpdated={setUpdated} updated={updated}/>
+    }
   </div>
   )
 }
