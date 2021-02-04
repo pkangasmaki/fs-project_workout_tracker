@@ -20,7 +20,10 @@ router.get('/:id', async (req, res) => {
 })
 
 router.put('/:id', async (req, res) => {
-  if (!req.body.sets || !req.body.repetitions || !req.body.weight) return res.status(400).send('values missing')
+  //Check if values are undefined and not zero
+  if (!req.body.sets && req.body.sets !== 0 || !req.body.repetitions && req.body.repetitions !== 0 || !req.body.weight && req.body.weight !== 0) {
+    res.status(400).send('values missing')
+  }
 
   if (typeof req.body.sets !== 'number' || typeof req.body.repetitions !== 'number' || typeof req.body.weight !== 'number') return res.status(400).send('invalid values')
 
@@ -36,7 +39,48 @@ router.put('/:id', async (req, res) => {
 //TO DO: authentication
 router.delete('/:id', async (req, res) => {
   const workout = await Workout.findById(req.params.id)
+  const routine = await Routine.findById(workout.routine)
+
+  // eslint-disable-next-line eqeqeq
+  routine.workouts = routine.workouts.filter(e => e != workout.id)
+
+  console.log(routine.workouts)
   await Workout.deleteOne(workout)
+  await routine.save()
+  res.send(workout)
+})
+
+router.post('/:id/moveup', async (req, res) => {
+  const workout = await Workout.findById(req.params.id)
+  const routine = await Routine.findById(workout.routine)
+
+  const moveUp = (array, element) => {
+    const index = array.indexOf(element)
+    if(index !== 0) {
+      array.splice(index, 1)
+      array.splice(index-1, 0, element)
+    }
+  }
+
+  moveUp(routine.workouts, workout.id)
+  routine.save()
+  res.send(workout)
+})
+
+router.post('/:id/movedown', async (req, res) => {
+  const workout = await Workout.findById(req.params.id)
+  const routine = await Routine.findById(workout.routine)
+
+  const moveDown = (array, element) => {
+    const index = array.indexOf(element)
+    if(index !== array.length-1) {
+      array.splice(index, 1)
+      array.splice(index+1, 0, element)
+    }
+  }
+
+  moveDown(routine.workouts, workout.id)
+  routine.save()
   res.send(workout)
 })
 
