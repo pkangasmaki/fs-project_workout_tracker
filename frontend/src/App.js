@@ -15,6 +15,9 @@ import EditRoutine from './components/EditRoutine'
 import Footer from './components/Footer'
 import Notification from './components/Notification'
 import Routines from './components/Routines'
+import Home from './components/Home'
+
+import Table from 'react-bootstrap/Table'
 
 import userService from './services/user'
 
@@ -50,32 +53,32 @@ const App = () => {
 
       {user &&
         <div style={{"marginLeft":"10px"}}>
-          <Logout user={user} setUser={setUser} setRoutine={setRoutine} setUserRoutines={setUserRoutines} />
           <nav>
-            <table className='nav-table'>
+            <Table striped>
               <tbody>
                 <tr>
                   <td>
-                    <Link to="/"> Home</Link>
+                    <Link to="/" className='link'> Home</Link>
+                  </td>
+                  <td style={{paddingLeft: 20}}>
+                    <Link to="/routine" className='link'> Routines</Link>
+                  </td>
+                  <td style={{paddingLeft: 20}}>
+                    <Link to="/edit" className='link'> Edit routines </Link>
+                  </td>
+                  <td style={{paddingLeft: 20}}>
+                    <Link to="/createnew" className='link'> Add routine </Link>
+                  </td>
+                  <td style={{paddingLeft: 20}}>
+                    <Link to="/suggestions" className='link'> Suggestions</Link>
                   </td>
                   <td>
-                    <Link to="/routine"> Routines</Link>
-                  </td>
-                  <td >
-                    <Link to="/edit"> Edit routines </Link>
-                  </td>
-                  <td>
-                    <Link to="/createnew"> Add routine </Link>
-                  </td>
-                  <td>
-                    <Link to="/suggestions"> Suggestions</Link>
+                    <Logout user={user} setUser={setUser} setRoutine={setRoutine} setUserRoutines={setUserRoutines} />
                   </td>
                 </tr>
               </tbody>
-            </table>
+            </Table>
           </nav>
-
-          <h3>Workout tracker</h3>
           <Notification notification={notification} />
           
           <Switch>
@@ -90,6 +93,9 @@ const App = () => {
             </Route>
             <Route path="/routine">
               <Routines setRoutine={setRoutine} routine={routine} routines={userRoutines}/>
+            </Route>
+            <Route path="/">
+              <Home />
             </Route>
           </Switch>
         </div>

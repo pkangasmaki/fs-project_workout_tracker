@@ -3,6 +3,7 @@ import React from 'react'
 const Suggestions = () => {
   return (
     <div>
+      <h3>Suggested routines for beginner/intermediate athletes</h3>
       <p>Push pull legs: 
         <i>
           <a href="https://medium.com/@BradNewtonTV/the-ultimate-beginner-guide-push-pull-legs-5d576162868f"> https://medium.com/@BradNewtonTV/the-ultimate-beginner-guide-push-pull-legs-5d576162868f</a>

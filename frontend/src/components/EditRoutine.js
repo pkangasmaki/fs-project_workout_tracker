@@ -36,7 +36,24 @@ const EditRoutine = ({setRoutine, routine, routines}) => {
   useEffect(storageHook, [])
   useEffect(hook, [routine, updated])
 
+  /* DROP DOWN VARIANT
+
+    <select defaultValue={routine} name="routines" id="routines" onChange={handleSelection}>
+    <option value='' disabled> select your routine </option>
+    {routines.map(routine =>
+      <option key={routine.id} value={routine.id}>{routine.name}</option>
+    )}
+  </select>
+
+
   //Set drop-down value to routine-state
+  const handleSelection = async (e) => {
+    setRoutine(e.target.value)
+    localStorage.removeItem('selectedRoutine');
+    localStorage.setItem('selectedRoutine', e.target.value);
+  }
+  */
+
   const handleSelection = async (e) => {
     setRoutine(e.target.value)
     localStorage.removeItem('selectedRoutine');
@@ -54,17 +71,36 @@ const EditRoutine = ({setRoutine, routine, routines}) => {
   return (
     <div>
       <div>
-      <select defaultValue={routine} name="routines" id="routines" onChange={handleSelection}>
-        <option value='' disabled> select your routine </option>
+      {routine && <h3>Edit your routines</h3>}
+      {!routine && <h5>Start by choosing a routine below.</h5>}
+      <div>
         {routines.map(routine =>
-          <option key={routine.id} value={routine.id}>{routine.name}</option>
+          <Button style={{paddingLeft: "4px"}} onClick={handleSelection} variant="light" key={routine.id} value={routine.id}>{routine.name}</Button>
         )}
-      </select>
       </div>
-    <div>
-      {routine && routines.length !== 0 && `Chosen routine: ${routines.find(e => e.id === routine).name}`}
-    </div>
-    <Table style={{"width":"75%", "border":"none"}} striped hover variant="dark">
+      </div>
+    <Table style={{"width":"75%", "border":"none"}} striped hover /* variant="dark" */>
+
+    <thead>
+        <tr>
+          <td>
+          {routine && routines.length !== 0 && `Chosen routine: ${routines.find(e => e.id === routine).name}`}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <b>Exercise</b>
+          </td>
+          <td>
+            <b>Sets</b>
+          </td>
+          <td>
+            <b>Weight</b> 
+          </td>
+        </tr>
+
+      </thead>
+
       <tbody>
         {workoutList.map((workout, index) =>
           <Workout key={workout.id} workout={workout} setUpdated={setUpdated} updated={updated} index={index} length={workoutList.length} />

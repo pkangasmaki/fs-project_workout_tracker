@@ -55,7 +55,7 @@ const CreateNew = ( { user, setNotification }) => {
 
   return (
     <div>
-      <p>Create a new routine </p>
+      <h3>Create a new routine </h3>
       <form onSubmit={handleSubmit}>
         <div> 
         <input type='text' placeholder="Routine name" value={newRoutine || ''} onChange={event => setNewRoutine(event.target.value)} /></div>

@@ -33,7 +33,6 @@ const Routines = ({setRoutine, routine, routines}) => {
   useEffect(storageHook, [])
   useEffect(hook, [routine])
 
-  //Set drop-down value to routine-state
   const handleSelection = async (e) => {
     setRoutine(e.target.value)
     localStorage.removeItem('selectedRoutine');
@@ -42,12 +41,13 @@ const Routines = ({setRoutine, routine, routines}) => {
 
   return (
     <div>
+      {routine && <h3>Your routines</h3>}
+      {!routine && <h5>Start by choosing a routine below.</h5>}
       <div>
         {routines.map(routine =>
-          <Button onClick={handleSelection} variant="link" key={routine.id} value={routine.id}>{routine.name}</Button>
+          <Button style={{paddingLeft: "4px"}} onClick={handleSelection} variant="light" key={routine.id} value={routine.id}>{routine.name}</Button>
         )}
       </div>
-    {!routine && <div>Start by choosing a routine!</div>}
     {routine && <Table style={{"width":"55%"}} striped bordered hover>
       <thead>
         <tr>
