@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button'
 import routineService from '../services/routine'
 import workoutService from '../services/workout'
 
-const CreateNew = ( { user }) => {
+const CreateNew = ( { user, setNotification }) => {
 
   const [newRoutine, setNewRoutine] = useState('')
   const [workout, setWorkout] = useState('')
@@ -17,7 +17,6 @@ const CreateNew = ( { user }) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     if(newRoutine) {
-      console.log('You created new routine:', newRoutine)
 
       const routineObj = {
         name: newRoutine,
@@ -31,7 +30,10 @@ const CreateNew = ( { user }) => {
         await workoutService.addWorkout(workouts[i], addedRoutine.id)
       }
 
-      alert('routine added')
+      setNotification(`New routine "${newRoutine}" added`)
+
+      setTimeout(() => {setNotification('')}, 3500);
+
       setNewRoutine('')
       setWorkouts([])
     } else {

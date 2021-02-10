@@ -14,6 +14,7 @@ import Login from './components/Login'
 import Logout from './components/Logout'
 import EditRoutine from './components/EditRoutine'
 import Footer from './components/Footer'
+import Notification from './components/Notification'
 
 import userService from './services/user'
 
@@ -22,6 +23,7 @@ const App = () => {
   const [routine, setRoutine] = useState('')
   const [user, setUser] = useState(null)
   const [userRoutines, setUserRoutines] = useState([])
+  const [notification, setNotification] = useState('')
 
   const routineHook = () => {
     const getRoutine = async (user) => {
@@ -68,13 +70,14 @@ const App = () => {
           </nav>
 
           <h3>Workout tracker</h3>
+          <Notification notification={notification} />
           
           <Switch>
             <Route path="/suggestions">
               <Suggestions />
             </Route>
             <Route path="/createnew">
-              <CreateNew user={user} />
+              <CreateNew user={user} setNotification={setNotification} />
             </Route>
             <Route path="/edit">
               <EditRoutine />
