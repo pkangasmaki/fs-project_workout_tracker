@@ -7,7 +7,6 @@ import {
   Link
 } from "react-router-dom";
 
-import Routines from './components/Routines'
 import CreateNew from './components/CreateNew'
 import Suggestions from './components/Suggestions'
 import Login from './components/Login'
@@ -15,6 +14,7 @@ import Logout from './components/Logout'
 import EditRoutine from './components/EditRoutine'
 import Footer from './components/Footer'
 import Notification from './components/Notification'
+import Routines from './components/Routines'
 
 import userService from './services/user'
 
@@ -55,8 +55,14 @@ const App = () => {
             <table className='nav-table'>
               <tbody>
                 <tr>
-                  <td >
+                  <td>
                     <Link to="/"> Home</Link>
+                  </td>
+                  <td>
+                    <Link to="/routine"> Routines</Link>
+                  </td>
+                  <td >
+                    <Link to="/edit"> Edit routines </Link>
                   </td>
                   <td>
                     <Link to="/createnew"> Add routine </Link>
@@ -80,10 +86,10 @@ const App = () => {
               <CreateNew user={user} setNotification={setNotification} />
             </Route>
             <Route path="/edit">
-              <EditRoutine />
+              <EditRoutine setRoutine={setRoutine} routine={routine} routines={userRoutines} />
             </Route>
-            <Route path="/">
-              <Routines setRoutine={setRoutine} routine={routine} routines={userRoutines} />
+            <Route path="/routine">
+              <Routines setRoutine={setRoutine} routine={routine} routines={userRoutines}/>
             </Route>
           </Switch>
         </div>
