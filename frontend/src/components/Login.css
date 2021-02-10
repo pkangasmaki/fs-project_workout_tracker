@@ -40,5 +40,7 @@
 }
 
 .title {
-  color: white
+  color: white;
+  font-family: 'Libre Baskerville';
+  font-style: italic
 }
