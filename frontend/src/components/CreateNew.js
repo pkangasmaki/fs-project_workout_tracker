@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
+import Col from 'react-bootstrap/Col'
 
 import routineService from '../services/routine'
 import workoutService from '../services/workout'
@@ -56,18 +58,34 @@ const CreateNew = ( { user, setNotification }) => {
   return (
     <div>
       <h3>Create a new routine </h3>
-      <form onSubmit={handleSubmit}>
-        <div> 
-        <input type='text' placeholder="Routine name" value={newRoutine || ''} onChange={event => setNewRoutine(event.target.value)} /></div>
-
-        <div>
-          <input
+      <Form.Group onSubmit={handleSubmit}>
+        <Form.Row>
+          <Col Col xs="auto" >
+            <Form.Control 
+              type='text'
+              placeholder="Routine name"
+              value={newRoutine || ''} onChange={event => setNewRoutine(event.target.value)}
+              />
+          </Col>
+        </Form.Row>
+        <Form.Row>
+        <Col Col xs="auto">
+          <Form.Control
             placeholder="Workout name"
             value={workout}
             onChange={({ target }) => setWorkout(target.value)}
           />
-          <Button onClick={addWorkout} type="button" variant="light" size="sm">add exercise*</Button>
-        </div>
+        </Col>
+        <Col>
+          <Button
+            onClick={addWorkout}
+            type="button"
+            variant="light"
+            size="sm">
+            add exercise*
+          </Button>
+        </Col>
+        </Form.Row>
         <div>
           <i>{workouts.join(', ')}</i>
         </div>
@@ -77,7 +95,7 @@ const CreateNew = ( { user, setNotification }) => {
 
         <Button type='submit' variant="primary" style={margin}>Create </Button>
         <Button onClick={clearField} variant="outline-danger" style={margin}>Clear </Button>
-      </form>
+      </Form.Group>
     </div>
   )
 }

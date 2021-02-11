@@ -8,7 +8,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-const Edit = ({ exercise, sets, repetitions, weight, id, setUpdated, updated }) => {
+const EditModal = ({ exercise, sets, repetitions, weight, id, setUpdated, updated }) => {
   const [show, setShow] = useState(false);
   const [editSets, setEditSets] = useState(sets)
   const [editRepetitions, setEditRepetitions] = useState(repetitions)
@@ -127,4 +127,4 @@ const Edit = ({ exercise, sets, repetitions, weight, id, setUpdated, updated }) 
   );
 }
 
-export default Edit
+export default EditModal

@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import Table from 'react-bootstrap/Table'
-import routineService from '../services/routine'
+
 import Button from 'react-bootstrap/Button'
+import RoutineTable from './RoutineTable'
+import EditRoutineTable from './EditRoutineTable'
+
+import routineService from '../services/routine'
 
 const Routines = ({setRoutine, routine, routines}) => {
 
   const [workoutList, setWorkoutList] = useState([])
+  const [updated, setUpdated] = useState(false)
+  const [view, setView] = useState('routine')
 
   const hook = () => {
     const getRoutine = async () => {
@@ -33,7 +38,7 @@ const Routines = ({setRoutine, routine, routines}) => {
   useEffect(storageHook, [])
   useEffect(hook, [routine])
 
-  const handleSelection = async (e) => {
+  const handleClick = async (e) => {
     setRoutine(e.target.value)
     localStorage.removeItem('selectedRoutine');
     localStorage.setItem('selectedRoutine', e.target.value);
@@ -41,43 +46,28 @@ const Routines = ({setRoutine, routine, routines}) => {
 
   return (
     <div>
-      {routine && <h3>Your routines</h3>}
+      {routine && view === 'routine' && 
+      <div>
+        <h3>
+          Your routines 
+          <Button variant='link' onClick={() => setView('edit')}> Switch to edit view </Button>
+        </h3>
+      </div>}
+      {routine && view === 'edit' && 
+      <div>
+        <h3>
+          Edit your routines
+          <Button variant='link' onClick={() => setView('routine')}> Exit edit view </Button>
+        </h3>
+      </div>}
       {!routine && <h5>Start by choosing a routine below.</h5>}
       <div>
         {routines.map(routine =>
-          <Button style={{paddingLeft: "4px"}} onClick={handleSelection} variant="light" key={routine.id} value={routine.id}>{routine.name}</Button>
+          <Button style={{paddingLeft: "4px"}} onClick={handleClick} variant="light" key={routine.id} value={routine.id}>{routine.name}</Button>
         )}
       </div>
-    {routine && <Table style={{"width":"55%"}} striped bordered hover>
-      <thead>
-        <tr>
-          <td>
-          {routine && routines.length !== 0 && `Chosen routine: ${routines.find(e => e.id === routine).name}`}
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <b>Exercise</b>
-          </td>
-          <td>
-            <b>Sets</b>
-          </td>
-          <td>
-            <b>Weight</b> 
-          </td>
-        </tr>
-
-      </thead>
-      <tbody>
-        {workoutList.map((workout) =>
-          <tr id={workout.id}>
-            <td> {workout.exercise} </td>
-            <td>{workout.sets}x{workout.repetitions}</td>
-            <td>{workout.weight}kg</td>
-          </tr>
-        )}
-      </tbody>
-    </Table>}
+    {routine && view === 'routine' && <RoutineTable routine={routine} routines={routines} workoutList={workoutList} />}
+    {routine && view === 'edit' && <EditRoutineTable routine={routine} setRoutine={setRoutine} routines={routines} workoutList={workoutList} updated={updated} setUpdated={setUpdated} />}
   </div>
   )
 }

@@ -18,7 +18,7 @@ input[type=number] {
 a:link.link, a:visited.link {
   background-color: #f44336;
   color: white;
-  padding: 14px 25px;
+  padding: 6px 14px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
