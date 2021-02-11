@@ -9,7 +9,8 @@ import loginService from '../services/login'
 import {
   Switch,
   Route,
-  Link
+  Link,
+  useHistory
 } from "react-router-dom";
 
 const Login = ( {setUser} ) => {
@@ -17,6 +18,8 @@ const Login = ( {setUser} ) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [stayLoggedIn, setStayLoggedIn] = useState(false)
+
+  let history = useHistory()
 
   const handleLogin = async (e) => {
     e.preventDefault()
@@ -30,6 +33,7 @@ const Login = ( {setUser} ) => {
       if(stayLoggedIn) {
         localStorage.setItem('loggedUser', JSON.stringify(loggedInUser));
       }
+      history.push('/')
     } catch (e) {
       console.log('Incorrect credentials')
     }
