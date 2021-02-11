@@ -16,8 +16,9 @@ const CreateNew = ( { user, setNotification }) => {
     margin: 5
   }
 
-  const handleSubmit = async (e) => {
+  const handleCreate = async (e) => {
     e.preventDefault()
+    console.log('hello:', newRoutine)
     if(newRoutine) {
 
       const routineObj = {
@@ -32,7 +33,7 @@ const CreateNew = ( { user, setNotification }) => {
         await workoutService.addWorkout(workouts[i], addedRoutine.id)
       }
 
-      setNotification(`New routine "${newRoutine}" added`)
+      setNotification(`New routine "${newRoutine}" created`)
 
       setTimeout(() => {setNotification('')}, 3500);
 
@@ -58,7 +59,7 @@ const CreateNew = ( { user, setNotification }) => {
   return (
     <div>
       <h3>Create a new routine </h3>
-      <Form.Group onSubmit={handleSubmit}>
+      <Form.Group>
         <Form.Row>
           <Col Col xs="auto" >
             <Form.Control 
@@ -93,7 +94,7 @@ const CreateNew = ( { user, setNotification }) => {
           <i style={{color: 'gray'}}>*note: you can modify weights and sets in home page</i>
         </div>
 
-        <Button type='submit' variant="primary" style={margin}>Create </Button>
+        <Button onClick={handleCreate} variant="primary" style={margin}>Create </Button>
         <Button onClick={clearField} variant="outline-danger" style={margin}>Clear </Button>
       </Form.Group>
     </div>

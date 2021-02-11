@@ -5,13 +5,16 @@ import Workout from './Workout'
 import Add from './Add'
 import routineService from '../services/routine'
 
-const EditRoutineTable = ({routine, setRoutine, routines, workoutList, updated, setUpdated}) => {
+const EditRoutineTable = ({routine, setRoutine, routines, workoutList, updated, setUpdated, setNotification}) => {
 
   const handleDelete = () => {
     if (window.confirm(`Are you sure you want to delete routine "${routines.find(e => e.id === routine).name}"?`)) {
       routineService.deleteRoutine(routine)
       setRoutine('')
       window.location.reload();
+      setNotification(`Routine "${routines.find(e => e.id === routine).name}" deleted`)
+
+      setTimeout(() => {setNotification('')}, 3500);
     }
   }
 
@@ -38,13 +41,13 @@ const EditRoutineTable = ({routine, setRoutine, routines, workoutList, updated, 
         </thead>
         <tbody>
           {workoutList.map((workout, index) =>
-            <Workout key={workout.id} workout={workout} setUpdated={setUpdated} updated={updated} index={index} length={workoutList.length} />
+            <Workout key={workout.id} setNotification={setNotification} workout={workout} setUpdated={setUpdated} updated={updated} index={index} length={workoutList.length} />
           )}
         </tbody>
       </Table>
       {routine && 
         <>
-        <Add routine={routine} setUpdated={setUpdated} updated={updated}/>
+        <Add setNotification={setNotification} routine={routine} setUpdated={setUpdated} updated={updated}/>
         <br/>
         <Button style={{color:"red"}} variant="link btn-sm" onClick={handleDelete}>-Delete routine</Button>
         </>

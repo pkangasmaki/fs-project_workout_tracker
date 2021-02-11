@@ -6,7 +6,7 @@ import EditRoutineTable from './EditRoutineTable'
 
 import routineService from '../services/routine'
 
-const Routines = ({setRoutine, routine, routines}) => {
+const Routines = ({setRoutine, routine, routines, setNotification}) => {
 
   const [workoutList, setWorkoutList] = useState([])
   const [updated, setUpdated] = useState(false)
@@ -67,7 +67,7 @@ const Routines = ({setRoutine, routine, routines}) => {
         )}
       </div>
     {routine && view === 'routine' && <RoutineTable routine={routine} routines={routines} workoutList={workoutList} />}
-    {routine && view === 'edit' && <EditRoutineTable routine={routine} setRoutine={setRoutine} routines={routines} workoutList={workoutList} updated={updated} setUpdated={setUpdated} />}
+    {routine && view === 'edit' && <EditRoutineTable setNotification={setNotification} routine={routine} setRoutine={setRoutine} routines={routines} workoutList={workoutList} updated={updated} setUpdated={setUpdated} />}
   </div>
   )
 }

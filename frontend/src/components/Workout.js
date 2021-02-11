@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import EditModal from './EditModal'
 import workoutService from '../services/workout' 
 
-const Workout = ({ workout, setUpdated, updated, index, length }) => {
+const Workout = ({ workout, setUpdated, updated, index, length, setNotification }) => {
 
   const [showUp, setShowUp] = useState(true)
   const [showDown, setShowDown] = useState(true)
@@ -42,7 +42,7 @@ const Workout = ({ workout, setUpdated, updated, index, length }) => {
       </svg>}
     </td>
     <td style={{"backgroundColor":"white", "border":"none", "color":"black"}}>
-      <EditModal exercise={workout.exercise} sets={workout.sets} repetitions={workout.repetitions} weight={workout.weight} id={workout.id} setUpdated={setUpdated} updated={updated} />
+      <EditModal setNotification={setNotification} exercise={workout.exercise} sets={workout.sets} repetitions={workout.repetitions} weight={workout.weight} id={workout.id} setUpdated={setUpdated} updated={updated} />
     </td>
   </tr>
   )

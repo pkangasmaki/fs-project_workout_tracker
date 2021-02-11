@@ -6,8 +6,14 @@ const Notification = ({ notification }) => {
     return null
   }
 
+  let color = 'info'
+
+  if(notification.includes('added') || notification.includes('created')) color='success'
+  if(notification.includes('deleted')) color='danger'
+  if(notification.includes('edited')) color='warning'
+
   return (
-    <Alert variant='success'>
+    <Alert variant={color}>
       {notification}
     </Alert>
   )

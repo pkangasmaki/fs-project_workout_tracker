@@ -8,7 +8,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-const EditModal = ({ exercise, sets, repetitions, weight, id, setUpdated, updated }) => {
+const EditModal = ({ setNotification, exercise, sets, repetitions, weight, id, setUpdated, updated }) => {
   const [show, setShow] = useState(false);
   const [editSets, setEditSets] = useState(sets)
   const [editRepetitions, setEditRepetitions] = useState(repetitions)
@@ -47,6 +47,9 @@ const EditModal = ({ exercise, sets, repetitions, weight, id, setUpdated, update
       await workoutService.deleteWorkout(id)
       setShow(false)
       setUpdated(!updated)
+      setNotification(`Exercise "${exercise}" deleted`)
+
+      setTimeout(() => {setNotification('')}, 3500);
     }
   }
 

@@ -85,7 +85,7 @@ const App = () => {
               <CreateNew user={user} setNotification={setNotification} />
             </Route>
             <Route path="/routine">
-              <Routines setRoutine={setRoutine} routine={routine} routines={userRoutines}/>
+              <Routines setRoutine={setRoutine} routine={routine} routines={userRoutines} setNotification={setNotification} />
             </Route>
             <Route path="/">
               <Home />
