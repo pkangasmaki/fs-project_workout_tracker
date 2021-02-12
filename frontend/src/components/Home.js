@@ -7,6 +7,7 @@ const Home = () => {
     marginTop: -20,
     width: '100vw',
     height: '65vh',
+    maxWidth: '100%',
     backgroundImage: `url(${background})`,
     backgroundSize: 'cover'
   };

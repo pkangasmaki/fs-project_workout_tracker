@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import './Login.css'
-import logo from '../taustakuva2.png';
+import logo from '../img/taustakuva2.png';
 import Signup from './Signup'
 import loginService from '../services/login'
 

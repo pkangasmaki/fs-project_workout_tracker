@@ -15,10 +15,13 @@ import Footer from './components/Footer'
 import Notification from './components/Notification'
 import Routines from './components/Routines'
 import Home from './components/Home'
+import DayForm from './components/DayForm'
 
 import Table from 'react-bootstrap/Table'
 
 import userService from './services/user'
+
+import logo from './img/logo.png'
 
 const App = () => {
 
@@ -46,31 +49,37 @@ const App = () => {
   useEffect(storageHook, [])
 
   return (
-    <div>
+    <div className="fill-window">
     <Router>
       {!user && <Login setUser={setUser} />}
 
       {user &&
         <div style={{"marginLeft":"10px"}}>
           <nav>
-            <Table striped>
+            <Table className='navig'>
               <tbody>
                 <tr>
                   <td>
-                    <Link to="/" className='link'> Home</Link>
-                  </td>
-                  <td style={{paddingLeft: 20}}>
-                    <Link to="/routine" className='link'> Routines</Link>
-                  </td>
-                  <td style={{paddingLeft: 20}}>
-                    <Link to="/createnew" className='link'> Add routine </Link>
-                  </td>
-                  <td style={{paddingLeft: 20}}>
-                    <Link to="/suggestions" className='link'> Suggestions</Link>
+                    <img className='logo' src={logo} alt="logo"></img>
                   </td>
                   <td>
-                    <Logout user={user} setUser={setUser} setRoutine={setRoutine} setUserRoutines={setUserRoutines} />
+                    <Link to="/" className='link'> Home</Link>
                   </td>
+                  <td >
+                    <Link to="/routine" className='link'> Routines</Link>
+                  </td>
+                  <td >
+                    <Link to="/days" className='link'> Day-planner </Link>
+                  </td>
+                  <td >
+                    <Link to="/createnew" className='link'> Add routine </Link>
+                  </td>
+                  <td >
+                    <Link to="/suggestions" className='link'> Suggestions</Link>
+                  </td>
+                  <div>
+                    <Logout user={user} setUser={setUser} setRoutine={setRoutine} setUserRoutines={setUserRoutines} />
+                  </div>
                 </tr>
               </tbody>
             </Table>
@@ -80,6 +89,9 @@ const App = () => {
           <Switch>
             <Route path="/suggestions">
               <Suggestions />
+            </Route>
+            <Route path="/days">
+              <DayForm routine={routine} routines={userRoutines} />
             </Route>
             <Route path="/createnew">
               <CreateNew user={user} setNotification={setNotification} />

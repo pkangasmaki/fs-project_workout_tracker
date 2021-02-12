@@ -12,9 +12,9 @@ const Logout = ({ user, setUser, setUserRoutines, setRoutine }) => {
   }
 
   return(
-    <div style={{float: "right"}}>
+    <div style={{float: "right", marginRight: 20, marginTop: 10}}>
       {user.name} logged in
-      <Button onClick={handleLogout}>Logout</Button>
+      <Button size= "sm" variant="secondary" onClick={handleLogout}>Logout</Button>
     </div>
   )
 }
