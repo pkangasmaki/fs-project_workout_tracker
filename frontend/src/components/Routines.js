@@ -3,10 +3,11 @@ import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button'
 import RoutineTable from './RoutineTable'
 import EditRoutineTable from './EditRoutineTable'
+import CreateNew from './CreateNew'
 
 import routineService from '../services/routine'
 
-const Routines = ({setRoutine, routine, routines, setNotification}) => {
+const Routines = ({setRoutine, routine, routines, setNotification, user}) => {
 
   const [workoutList, setWorkoutList] = useState([])
   const [updated, setUpdated] = useState(false)
@@ -65,9 +66,11 @@ const Routines = ({setRoutine, routine, routines, setNotification}) => {
         {routines.map(routine =>
           <Button style={{paddingLeft: "4px"}} onClick={handleClick} variant="light" key={routine.id} value={routine.id}>{routine.name}</Button>
         )}
+        <Button variant='link' size="sm">+new routine</Button>
       </div>
     {routine && view === 'routine' && <RoutineTable routine={routine} routines={routines} workoutList={workoutList} />}
     {routine && view === 'edit' && <EditRoutineTable setNotification={setNotification} routine={routine} setRoutine={setRoutine} routines={routines} workoutList={workoutList} updated={updated} setUpdated={setUpdated} />}
+    <CreateNew user={user} setNotification={setNotification} />
   </div>
   )
 }

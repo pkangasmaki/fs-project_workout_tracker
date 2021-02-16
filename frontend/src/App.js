@@ -16,6 +16,7 @@ import Notification from './components/Notification'
 import Routines from './components/Routines'
 import Home from './components/Home'
 import DayForm from './components/DayForm'
+import SleepPage from './components/SleepPage'
 
 import Table from 'react-bootstrap/Table'
 
@@ -75,6 +76,9 @@ const App = () => {
                     <Link to="/createnew" className='link'> Add routine </Link>
                   </td>
                   <td >
+                    <Link to="/sleep" className='link'> Sleep-schedule </Link>
+                  </td>
+                  <td >
                     <Link to="/suggestions" className='link'> Suggestions</Link>
                   </td>
                   <div>
@@ -90,6 +94,9 @@ const App = () => {
             <Route path="/suggestions">
               <Suggestions />
             </Route>
+            <Route path="/sleep">
+              <SleepPage />
+            </Route>
             <Route path="/days">
               <DayForm routine={routine} routines={userRoutines} />
             </Route>
@@ -97,7 +104,7 @@ const App = () => {
               <CreateNew user={user} setNotification={setNotification} />
             </Route>
             <Route path="/routine">
-              <Routines setRoutine={setRoutine} routine={routine} routines={userRoutines} setNotification={setNotification} />
+              <Routines user={user} setRoutine={setRoutine} routine={routine} routines={userRoutines} setNotification={setNotification} />
             </Route>
             <Route path="/">
               <Home />
